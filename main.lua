@@ -31,7 +31,7 @@ local function unhighlight(ref)
 end
 
 local function activateCallback(e)
-  unhighlight(e.target)
+  -- unhighlight(e.target)
 end
 event.register(tes3.event.activate, activateCallback)
 
@@ -40,6 +40,11 @@ local function onActivationTargetChanged(e)
     highlight(e.current)
   end
   if e.previous then
+    local topMenu = tes3.getTopMenu()
+    if topMenu and topMenu.name == 'MenuDialog' then
+      return
+    end
+
     unhighlight(e.previous)
   end
 end
